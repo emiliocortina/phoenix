@@ -15,24 +15,25 @@ declare global {
 })
 export class EventdisplayService {
 
-  private configuration: Configuration;
+  public configuration: Configuration;
   private eventsData: any;
   private frameID: number;
   private onEventsChange: ((events: any) => void)[] = [];
   private onDisplayedEventChange: ((nowDisplayingEvent: any) => void)[] = [];
 
   constructor(public graphicsLibrary: ThreeService, private ui: UIService, private http: HttpClient) {
+    this.configuration = new Configuration();
   }
 
   /**
    * Initializes the components needed to later represent the geometries.
    * @param configuration used to customize different aspects.
    */
-  public init(configuration: Configuration): void {
+  public init(eventDisplayCanvas: HTMLElement, configuration: Configuration): void {
     this.configuration = configuration;
-    this.graphicsLibrary.init(configuration);
+    this.graphicsLibrary.init(eventDisplayCanvas, configuration);
     // Showing the UI elements
-    this.ui.showUI(configuration);
+    this.ui.showUI(eventDisplayCanvas, configuration);
     if (this.frameID) {
       cancelAnimationFrame(this.frameID);
     }
@@ -49,18 +50,18 @@ export class EventdisplayService {
     this.enableEventDisplayConsole();
   }
 
-  public initVR(configuration: Configuration) {
+  public initVR(eventDisplayCanvas: HTMLElement, configuration: Configuration) {
     this.configuration = configuration;
-    this.graphicsLibrary.init(configuration);
+    this.graphicsLibrary.init(eventDisplayCanvas, configuration);
     // Showing the UI elements
-    this.ui.showUI(configuration);
+    this.ui.showUI(eventDisplayCanvas, configuration);
     // Animate loop
     const animate = () => {
       this.graphicsLibrary.updateControls();
       this.ui.updateUI();
       this.graphicsLibrary.render();
     };
-    this.graphicsLibrary.setVRButton();
+    this.graphicsLibrary.setVRButton(eventDisplayCanvas);
     this.graphicsLibrary.setAnimationLoop(animate);
   }
 

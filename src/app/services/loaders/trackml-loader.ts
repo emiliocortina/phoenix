@@ -108,9 +108,6 @@ export class TrackmlLoader extends PhoenixLoader {
               [parseFloat(this.truthData[i][1]), parseFloat(this.truthData[i][2]), parseFloat(this.truthData[i][3])]);
           }
         }
-        if (i % stepSize === 0) {
-          document.getElementById('info').innerHTML = 'Processed ' + 100 * i / this.truthData.length + '% of event data.';
-        }
       }
     }
 

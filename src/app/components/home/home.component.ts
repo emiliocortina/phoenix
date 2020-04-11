@@ -1,5 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { EventdisplayService } from '../../services/eventdisplay.service';
+import { Component, AfterViewInit } from '@angular/core';
 import { UIService } from '../../services/ui.service';
 
 @Component({

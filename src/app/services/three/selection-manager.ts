@@ -21,6 +21,7 @@ export class SelectionManager {
     private composer: EffectComposer;
     private outlinePass: OutlinePass;
     private renderPass: RenderPass;
+    private canvas: HTMLCanvasElement;
 
     constructor() {
         this.isInit = false;
@@ -34,6 +35,7 @@ export class SelectionManager {
     public init(camera: Camera, scene: Scene, renderer: WebGLRenderer) {
         this.camera = camera;
         this.scene = scene;
+        this.canvas = renderer.domElement;
         this.isInit = true;
         this.initOutlinePass(camera, scene, renderer);
     }
@@ -72,16 +74,16 @@ export class SelectionManager {
     }
 
     private enableSelecting() {
-        document.getElementById('three-canvas').addEventListener('mousemove',
+        this.canvas.addEventListener('mousemove',
             this.onTouchMove, true);
-        document.getElementById('three-canvas').addEventListener('click',
+        this.canvas.addEventListener('click',
             this.onDocumentMouseDown, true);
     }
 
     private disableSelecting() {
-        document.getElementById('three-canvas').removeEventListener('mousemove',
+        this.canvas.removeEventListener('mousemove',
             this.onTouchMove, true);
-        document.getElementById('three-canvas').removeEventListener('click',
+        this.canvas.removeEventListener('click',
             this.onDocumentMouseDown, true);
         this.outlinePass.selectedObjects = [];
     }

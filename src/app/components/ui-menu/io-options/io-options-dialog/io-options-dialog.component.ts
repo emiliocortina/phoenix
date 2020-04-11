@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { EventdisplayService } from 'src/app/services/eventdisplay.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { JiveXMLLoader } from '../../../../services/loaders/jivexml-loader';

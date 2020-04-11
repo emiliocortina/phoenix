@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { EventdisplayService } from '../../services/eventdisplay.service';
 import { Configuration } from '../../services/extras/configuration.model';
 import { PresetView } from '../../services/extras/preset-view.model';
@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './trackml.component.html',
   styleUrls: ['./trackml.component.scss']
 })
-export class TrackmlComponent implements OnInit {
+export class TrackmlComponent implements AfterViewInit {
 
   hitsFile = 'assets/files/TrackML/event000001000-hits.csv';
   particlesFile = 'assets/files/TrackML/event000001000-particles.csv';
@@ -22,21 +22,21 @@ export class TrackmlComponent implements OnInit {
     headers: new HttpHeaders({}),
     responseType: 'text' as 'json'
   };
+  configuration: Configuration;
 
 
   constructor(private eventDisplay: EventdisplayService, private http: HttpClient) {
-  }
-
-  ngOnInit() {
-    const configuration = new Configuration();
-    configuration.presetViews = [
+    this.configuration = new Configuration();
+    this.configuration.presetViews = [
       new PresetView('Right View', [0, 0, 6000], 'right'),
       new PresetView('Center View', [-500, 1000, 0], 'circle'),
       new PresetView('Left View', [0, 0, -6000], 'left')
     ];
     this.trackMLLoader = new TrackmlLoader();
-    configuration.eventDataLoader = this.trackMLLoader;
-    this.eventDisplay.init(configuration);
+    this.configuration.eventDataLoader = this.trackMLLoader;
+  }
+
+  ngAfterViewInit() {
     this.eventDisplay.loadOBJGeometry('assets/geometry/TrackML/strip_long_simplified.obj', 'Long Strip', 0xe9a23b, true);
     this.eventDisplay.loadOBJGeometry('assets/geometry/TrackML/pixel_simplified.obj', 'Pixel', 0xe2a9e8, true);
     this.eventDisplay.loadOBJGeometry('assets/geometry/TrackML/strip_short_simplified.obj', 'Short Strip', 0x369f95, true);

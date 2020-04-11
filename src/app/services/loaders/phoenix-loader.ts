@@ -40,8 +40,10 @@ export class PhoenixLoader implements EventDataLoader {
 
     const collections = [];
     for (const objectType of Object.keys(this.eventData)) {
-      for (const collection of Object.keys(this.eventData[objectType])) {
-        collections.push(collection);
+      if (this.eventData[objectType]) {
+        for (const collection of Object.keys(this.eventData[objectType])) {
+          collections.push(collection);
+        }
       }
     }
     return collections;

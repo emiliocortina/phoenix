@@ -1,19 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { EventdisplayService } from '../../services/eventdisplay.service';
-import { Configuration } from '../../services/extras/configuration.model';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-geometry',
   templateUrl: './geometry.component.html',
   styleUrls: ['./geometry.component.scss']
 })
-export class GeometryComponent implements OnInit {
+export class GeometryComponent {
 
-  constructor(private eventDisplay: EventdisplayService) {
-  }
-
-  ngOnInit() {
-    this.eventDisplay.init(new Configuration());
+  constructor() {
   }
 
 }

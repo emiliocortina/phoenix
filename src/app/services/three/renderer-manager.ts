@@ -10,9 +10,9 @@ export class RendererManager {
 
 
   // CONSTRUCTOR
-  constructor() {
+  constructor(eventDisplayCanvas: HTMLElement) {
     // Main renderer for current browsers
-    this.setRenderer();
+    this.setRenderer(eventDisplayCanvas);
   }
 
   public render(scene: Scene, controlsManager: ControlsManager) {
@@ -32,7 +32,7 @@ export class RendererManager {
     }
   }
 
-  private setRenderer() {
+  private setRenderer(eventDisplayCanvas: HTMLElement) {
     const renderer: WebGLRenderer = new WebGLRenderer();
 
     this.addRenderer(renderer);
@@ -42,13 +42,7 @@ export class RendererManager {
       window.innerHeight,
       false
     );
-    this.getMainRenderer().domElement.className = 'ui-element';
-    this.getMainRenderer().domElement.id = 'three-canvas';
-    let canvas = document.getElementById('eventDisplay');
-    if (canvas == null) {
-      canvas = document.body;
-    }
-    canvas.appendChild(this.getMainRenderer().domElement);
+    eventDisplayCanvas.appendChild(this.getMainRenderer().domElement);
   }
 
   // SET/GET

@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { EventdisplayService } from '../../services/eventdisplay.service';
-import { Configuration } from '../../services/extras/configuration.model';
-import { PresetView } from '../../services/extras/preset-view.model';
 import { HttpClient } from '@angular/common/http';
-import { JiveXMLLoader } from '../../services/loaders/jivexml-loader';
 
 
 @Component({
@@ -11,21 +8,12 @@ import { JiveXMLLoader } from '../../services/loaders/jivexml-loader';
   templateUrl: './atlas.component.html',
   styleUrls: ['./atlas.component.scss']
 })
-export class AtlasComponent implements OnInit {
+export class AtlasComponent implements AfterViewInit {
 
   constructor(private eventDisplay: EventdisplayService, private http: HttpClient) {
   }
 
-  ngOnInit() {
-
-    const configuration = new Configuration();
-    configuration.presetViews = [
-      new PresetView('Left View', [0, 0, -12000], 'left'),
-      new PresetView('Center View', [-500, 12000, 0], 'circle'),
-      new PresetView('Right View', [0, 0, 12000], 'right')
-    ];
-
-    this.eventDisplay.init(configuration);
+  ngAfterViewInit() {
     this.http.get('assets/files/event_data/atlaseventdump2.json')
       .subscribe((res: any) => this.eventDisplay.parsePhoenixEvents(res));
     this.eventDisplay.loadOBJGeometry('assets/geometry/ATLASR2/toroids.obj', 'Toroids', 0xaaaaaa, false);

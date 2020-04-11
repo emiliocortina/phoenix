@@ -51,14 +51,14 @@ export class ThreeService {
    * Initializes the necessary three.js functionality.
    * @param configuration used to customize different aspects.
    */
-  public init(configuration: Configuration) {
+  public init(eventDisplayCanvas: HTMLElement, configuration: Configuration) {
     // Scene manager
     this.sceneManager = new SceneManager(this.ignoreList);
     // IO Managers
     this.exportManager = new ExportManager();
     this.importManager = new ImportManager(this.clipPlanes, SceneManager.EVENT_DATA_ID, SceneManager.GEOMETRIES_ID);
     // Renderer manager
-    this.rendererManager = new RendererManager();
+    this.rendererManager = new RendererManager(eventDisplayCanvas);
     // Controls manager
     this.controlsManager = new ControlsManager(this.rendererManager);
     // Selection manager
@@ -169,12 +169,8 @@ export class ThreeService {
   /**
    * Displays a button to toggle VR.
    */
-  public setVRButton() {
-    let canvas = document.getElementById('eventDisplay');
-    if (canvas == null) {
-      canvas = document.body;
-    }
-    canvas.appendChild(
+  public setVRButton(eventDisplay: HTMLElement) {
+    eventDisplay.appendChild(
       VRButton.createButton(this.rendererManager.getMainRenderer())
     );
   }

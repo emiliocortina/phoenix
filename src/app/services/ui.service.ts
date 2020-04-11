@@ -37,39 +37,32 @@ export class UIService {
   constructor(private three: ThreeService) {
   }
 
-  public showUI(configuration: Configuration) {
+  public showUI(eventDisplayCanvas: HTMLElement, configuration: Configuration) {
     // Shows a panel on screen with information about the performance (fps).
-    this.showStats();
+    this.showStats(eventDisplayCanvas);
     // Shows the menu that contains the options to interact with the scene.
-    this.showMenu(configuration);
+    this.showMenu(eventDisplayCanvas, configuration);
     // Detect UI color scheme
     this.detectColorScheme();
   }
 
-  private showStats() {
+  private showStats(eventDisplayCanvas: HTMLElement) {
     this.stats = Stats();
     this.stats.showPanel(0);
     this.stats.dom.className = 'ui-element';
     this.stats.domElement.style.cssText = 'position: absolute; left: 0px; cursor: pointer; opacity: 0.9; z-index: 10; bottom: 0px;';
-    let canvas = document.getElementById('eventDisplay');
-    if (canvas == null) {
-      canvas = document.body;
-    }
-    canvas.appendChild(this.stats.dom);
+    eventDisplayCanvas.appendChild(this.stats.dom);
   }
 
   public updateUI() {
     this.stats.update();
   }
 
-  private showMenu(configuration: Configuration) {
+  private showMenu(eventDisplayCanvas: HTMLElement, configuration: Configuration) {
     this.configuration = configuration;
     this.gui = new dat.GUI();
     this.gui.domElement.id = 'gui';
-    this.canvas = document.getElementById('eventDisplay');
-    if (this.canvas == null) {
-      this.canvas = document.body;
-    }
+    this.canvas = eventDisplayCanvas;
     this.canvas.appendChild(this.gui.domElement);
     this.geomFolder = null;
     this.eventFolder = null;
@@ -77,9 +70,9 @@ export class UIService {
   }
 
   public clearUI() {
-    const gui = document.getElementById('gui');
-    if (gui != null) {
-      gui.remove();
+    const gui = this.gui;
+    if (gui != null && gui.domElement) {
+      this.gui.domElement.remove();
     }
     this.geomFolder = null;
   }

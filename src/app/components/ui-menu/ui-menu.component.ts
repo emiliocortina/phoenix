@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { EventdisplayService } from 'src/app/services/eventdisplay.service';
-import { MatDialog } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-ui-menu',

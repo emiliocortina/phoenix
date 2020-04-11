@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { EventdisplayService } from 'src/app/services/eventdisplay.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { EventdisplayService } from 'src/app/services/eventdisplay.service';
   templateUrl: './collections-info-overlay.component.html',
   styleUrls: ['./collections-info-overlay.component.scss']
 })
-export class CollectionsInfoOverlayComponent implements OnInit {
+export class CollectionsInfoOverlayComponent implements AfterViewInit {
 
   @Input() showObjectsInfo: boolean;
   // showObjectsInfo = true;
@@ -16,7 +16,7 @@ export class CollectionsInfoOverlayComponent implements OnInit {
 
   constructor(private eventDisplay: EventdisplayService) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.eventDisplay.listenToDisplayedEventChange((event) => this.collections = this.eventDisplay.getCollections());
   }
 

@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { EventdisplayService } from '../../services/eventdisplay.service';
-import { Configuration } from '../../services/extras/configuration.model';
-import { PresetView } from '../../services/extras/preset-view.model';
 import { HttpClient } from '@angular/common/http';
 import { LHCbLoader } from '../../services/loaders/lhcb-loader';
 
@@ -11,29 +9,21 @@ import { LHCbLoader } from '../../services/loaders/lhcb-loader';
   templateUrl: './lhcb.component.html',
   styleUrls: ['./lhcb.component.scss']
 })
-export class LHCbComponent implements OnInit {
+export class LHCbComponent implements AfterViewInit {
   events: any;
   loader: LHCbLoader;
 
   constructor(private eventDisplay: EventdisplayService, private http: HttpClient) {
   }
 
-  ngOnInit() {
-    const configuration = new Configuration();
-    configuration.presetViews = [
-      new PresetView('Right View', [0, 0, 6000], 'right'),
-      new PresetView('Center View', [-500, 1000, 0], 'circle'),
-      new PresetView('Left View', [0, 0, -6000], 'left')
-    ];
-    this.eventDisplay.init(configuration);
+  ngAfterViewInit() {
     this.eventDisplay.loadGLTFGeometry('assets/geometry/LHCb/lhcb.gltf', 'LHCb detector');
     this.loader = new LHCbLoader();
-    configuration.eventDataLoader = this.loader;
-    this.loadEventData(configuration);
+    this.loadEventData();
 
   }
 
-  private loadEventData(config: Configuration) {
+  private loadEventData() {
     this.http.get('assets/files/lhcb/00191749_0005296728.json').subscribe((data: any) => {
       this.loader.process(data);
       const eventData = this.loader.getEventData();
