@@ -1,0 +1,15 @@
+{
+  "name": "phoenix-library",
+  "version": "0.0.12",
+  "peerDependencies": {
+    "@angular/common": "^9.0.7",
+    "@angular/core": "^9.0.7",
+    "tslib": "^1.10.0",
+    "@tweenjs/tween.js": "^18.5.0",
+    "dat.gui": "^0.7.7",
+    "three": "^0.115.0",
+    "@angular/animations": "~9.0.5",
+    "@angular/cdk": "^9.1.1",
+    "@angular/material": "^9.1.1"
+  }
+}

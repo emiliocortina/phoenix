@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'phoenix-ui-menu',
+  templateUrl: './ui-menu.component.html',
+  styleUrls: ['./ui-menu.component.scss']
+})
+export class UiMenuComponent {
+
+  constructor() { }
+
+}

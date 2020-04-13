@@ -30,9 +30,9 @@ The app will automatically reload if you change any of the source files.
 
 
 ## Documentation
-* [User manual.](./src/assets/docs/users.md)
+* [User manual.](./projects/phoenix-app/src/assets/docs/users.md)
 * [How to contribute.](./CONTRIBUTING.md)
-* [Developer guide.](./src/assets/docs/developers.md)
+* [Developer guide.](./projects/phoenix-app/src/assets/docs/developers.md)
 
 ## Contact
 

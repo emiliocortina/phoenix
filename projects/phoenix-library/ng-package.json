@@ -1,0 +1,21 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/phoenix-library",
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "@tweenjs/tween.js": "@tweenjs/tween.js",
+      "three": "three",
+      "three/examples/jsm/webxr/VRButton.js": "three/examples/jsm/webxr/VRButton.js",
+      "three/examples/jsm/controls/OrbitControls": "three/examples/jsm/controls/OrbitControls",
+      "three/examples/jsm/exporters/OBJExporter": "three/examples/jsm/exporters/OBJExporter",
+      "three/examples/jsm/exporters/GLTFExporter": "three/examples/jsm/exporters/GLTFExporter",
+      "three/examples/jsm/loaders/OBJLoader": "three/examples/jsm/loaders/OBJLoader",
+      "three/examples/jsm/loaders/GLTFLoader": "three/examples/jsm/loaders/GLTFLoader",
+      "three/examples/jsm/postprocessing/OutlinePass.js": "three/examples/jsm/postprocessing/OutlinePass.js",
+      "three/examples/jsm/postprocessing/EffectComposer.js": "three/examples/jsm/postprocessing/EffectComposer.js",
+      "three/examples/jsm/postprocessing/RenderPass.js": "three/examples/jsm/postprocessing/RenderPass.js",
+      "dat.gui": "dat.gui"
+    }
+  }
+}
