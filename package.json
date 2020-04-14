@@ -13,7 +13,7 @@
     "deploy": "ng build phoenix-app --prod --output-path docs --base-href \"/phoenix/\" && cp ./docs/index.html ./docs/404.html",
     "copyScss": "cp \"projects/phoenix-library/index.scss\" \"dist/phoenix-library/\"",
     "test:coverage": "rm -rf ./coverage && ng test --no-watch --code-coverage",
-    "coveralls": "cat ./coverage/phoenix/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "cat ./coverage/phoenix-app/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "private": true,
   "dependencies": {
